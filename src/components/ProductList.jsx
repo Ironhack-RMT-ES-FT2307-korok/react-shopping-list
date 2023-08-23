@@ -1,7 +1,7 @@
 import Product from "./Product"
 
 function ProductList(props) {
-  console.log(props.allProducts)
+  console.log(props.productsToRender)
   return (
     <div>
       
@@ -12,7 +12,7 @@ function ProductList(props) {
       <Product />
       <Product /> */}
 
-      {props.allProducts.map((eachProduct, i) => {
+      {props.productsToRender.map((eachProduct, i) => {
 
         return (
           // <Product name={eachProduct.name} price={eachProduct.price}/>

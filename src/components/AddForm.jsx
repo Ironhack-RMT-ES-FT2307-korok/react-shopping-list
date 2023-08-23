@@ -36,6 +36,8 @@ function AddForm(props) {
 
     console.log("el producto a crear es:", newProduct)
 
+    props.setProductsToRender(clone) // para actualizar despues de implementar el search
+
   }
 
   return (

@@ -25,19 +25,52 @@ let testProducts = [
 
 function App() {
 
-  const [ allProducts, setAllProducts ] = useState(testProducts)
-  // console.log(allProducts)
+  const [ allProducts, setAllProducts ] = useState([])
+  // siempre tiene TODA la info
+
+  // otro estado que solo tiene lo que el usuario ve en la vista
+  const [ productsToRender, setProductsToRender ] = useState(allProducts)
+
+
+  const [ isFormShowing, setIsFormShowing ] = useState(false)
+
+  const handleShowForm = () => {
+    if (isFormShowing === false) {
+      setIsFormShowing(true)
+    } else {
+      setIsFormShowing(false)
+    }
+  }
 
   return (
     <>
 
       <h2>Lista de Compra</h2>
 
-      <AddForm allProducts={allProducts} setAllProducts={setAllProducts}/>
+      <hr />
 
-      <Search />
+      <button onClick={handleShowForm}>Mostrar Form</button>
+      {isFormShowing === true 
+      ? <AddForm 
+          allProducts={allProducts} 
+          setAllProducts={setAllProducts} 
+          setProductsToRender={setProductsToRender}
+        /> 
+      : null}
+      
 
-      <ProductList allProducts={allProducts}/>
+      <hr />
+
+      <Search 
+        allProducts={allProducts} 
+        setProductsToRender={setProductsToRender}
+      />
+
+      <hr />
+
+      <ProductList 
+        productsToRender={productsToRender}
+      />
 
     </>
   )
