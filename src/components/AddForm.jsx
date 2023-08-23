@@ -1,4 +1,8 @@
 import { useState } from "react"
+import { Button } from "react-bootstrap";
+
+import Form from 'react-bootstrap/Form';
+import Toast from 'react-bootstrap/Toast';
 
 function AddForm(props) {
 
@@ -17,9 +21,18 @@ function AddForm(props) {
     setPriceInput(event.target.value)
   }
 
+  const [show, setShow] = useState(false);
+
   const handleSubmitForm = (event) => {
+
     console.log("intentando crear producto")
     event.preventDefault() // prevenir cualquier comportamiento normal del formulario
+
+    if (nameInput === "" || priceInput === 0) {
+      // algun campo está vacio
+      setShow(true)
+      return;
+    }
 
     // Queremos crear un objeto de producto, dentro de el array de productos
     let newProduct = {
@@ -45,21 +58,30 @@ function AddForm(props) {
 
       <h4>Agregar un producto</h4>
       
-      <form onSubmit={handleSubmitForm}>
+      <Form onSubmit={handleSubmitForm}>
 
-        <label htmlFor="name">Nombre:</label>
-        <input type="text" name="name" onChange={handleNameChange} value={nameInput}/>
+        <Form.Group className="mb-3">
+          <Form.Label htmlFor="name">Nombre:</Form.Label>
+          <Form.Control type="text" name="name" onChange={handleNameChange} value={nameInput}/>
+        </Form.Group>
 
-        <br />
+        <Form.Group className="mb-3">
+          <Form.Label htmlFor="price">Precio</Form.Label>
+          <Form.Control type="number" name="price" onChange={handlePriceChange} value={priceInput}/>
+        </Form.Group>
 
-        <label htmlFor="price">Precio</label>
-        <input type="number" name="price" onChange={handlePriceChange} value={priceInput}/>
+        <Button type="submit" variant="success">Agregar</Button>
 
-        <br />
+        <Toast style={{position: "fixed", bottom: 0}} bg="danger" onClose={() => setShow(false)} show={show} delay={3000} autohide>
+          <Toast.Header>
+            Error en el formulario
+          </Toast.Header>
+          <Toast.Body>
+            Todos los campos deben estar llenos
+          </Toast.Body>
+        </Toast>
 
-        <button >Agregar</button>
-
-      </form>
+      </Form>
 
     </div>
   )

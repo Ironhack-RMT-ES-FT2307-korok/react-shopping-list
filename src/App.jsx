@@ -1,8 +1,14 @@
 import { useState } from 'react'
+import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css'
 import AddForm from './components/AddForm'
 import ProductList from './components/ProductList'
 import Search from './components/Search'
+
+// componentes estilizados Bootstrap
+import Button from 'react-bootstrap/Button';
+import Collapse from 'react-bootstrap/Collapse';
+
 
 let testProducts = [
   {
@@ -49,14 +55,25 @@ function App() {
 
       <hr />
 
-      <button onClick={handleShowForm}>Mostrar Form</button>
-      {isFormShowing === true 
+      <Button variant="info" onClick={handleShowForm}>Mostrar Form</Button>
+
+      {/* {isFormShowing === true 
       ? <AddForm 
           allProducts={allProducts} 
           setAllProducts={setAllProducts} 
           setProductsToRender={setProductsToRender}
         /> 
-      : null}
+      : null} */}
+
+      <Collapse in={isFormShowing}>
+        <div>
+          <AddForm 
+            allProducts={allProducts} 
+            setAllProducts={setAllProducts} 
+            setProductsToRender={setProductsToRender}
+          /> 
+        </div>
+      </Collapse>
       
 
       <hr />
