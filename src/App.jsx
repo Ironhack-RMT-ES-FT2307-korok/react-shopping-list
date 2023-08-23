@@ -33,7 +33,7 @@ function App() {
 
       <h2>Lista de Compra</h2>
 
-      <AddForm />
+      <AddForm allProducts={allProducts} setAllProducts={setAllProducts}/>
 
       <Search />
 
